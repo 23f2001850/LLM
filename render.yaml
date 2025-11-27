@@ -1,32 +1,16 @@
-# Deployment Configuration for Render.com
-
-## Build Command
-```bash
-cd backend && pip install -r requirements.txt && playwright install chromium
-```
-
-## Start Command
-```bash
-cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
-```
-
-## Environment Variables
-```
-QUIZ_SECRET=my-quiz-secret-2025
-MAX_QUIZ_TIME=180
-PORT=10000
-```
-
-## Health Check Path
-```
-/health
-```
-
-## Region
-- Singapore (closest to India for lower latency)
-
-## Instance Type
-- Free tier (sufficient for evaluation)
-
-## Auto-Deploy
-- Enable auto-deploy from main branch
+services:
+  - type: web
+    name: llm-quiz-bot-23f2001850
+    runtime: python
+    region: singapore
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt && playwright install chromium
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: QUIZ_SECRET
+        sync: false
+      - key: MAX_QUIZ_TIME
+        value: 180
+      - key: PORT
+        value: 8000
