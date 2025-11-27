@@ -263,6 +263,7 @@ async def solve_quiz(quiz_request: QuizRequest):
                     "status": "continuing",
                     "time": time.time() - start_time
                 })
+                chain_complete = False
             elif not submit_response.get("correct", True) and not timeout_mgr.is_expired():
                 # Answer was wrong, could retry with alternative analysis
                 logger.warning(f"Quiz {quiz_count} answer incorrect: {submit_response.get('message', 'No details')}")
@@ -272,6 +273,7 @@ async def solve_quiz(quiz_request: QuizRequest):
                     "status": "failed",
                     "time": time.time() - start_time
                 })
+                chain_complete = False
                 # For now, stop on incorrect (could implement retry logic here)
                 break
             else:
@@ -283,6 +285,7 @@ async def solve_quiz(quiz_request: QuizRequest):
                     "status": "success",
                     "time": time.time() - start_time
                 })
+                chain_complete = True
                 break
         
         # Calculate total time
@@ -300,8 +303,10 @@ async def solve_quiz(quiz_request: QuizRequest):
         }
         quiz_history.append(history_entry)
         
-        # Determine if chain is complete
-        chain_complete = (quiz_count >= max_quizzes) or (not current_url) or timeout_mgr.is_expired()
+        # chain_complete is already set in the loop above
+        # If we exited the loop without setting it, set it based on conditions
+        if 'chain_complete' not in locals():
+            chain_complete = (quiz_count >= max_quizzes) or timeout_mgr.is_expired()
         
         logger.info(f"✓ Quiz chain completed: {quiz_count} quiz(es) solved in {time_taken:.2f}s")
         
