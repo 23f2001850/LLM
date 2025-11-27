@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz 6: Average Sales</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #fae8ff; }
+        .quiz-container { background: white; padding: 30px; border-radius: 10px; }
+        h1 { color: #9333ea; }
+        .question { background: #f3e8ff; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .data-source { background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        form { padding: 20px; background: #dbeafe; border-radius: 8px; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; }
+        button { background: #9333ea; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>📊 Quiz 6: Mean Sales Amount</h1>
+        
+        <div class="question">
+            <h2>Question:</h2>
+            <p><strong>Calculate the average (mean) sales amount across all regions.</strong></p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Data:</h3>
+            <a href="data:text/csv;charset=utf-8,Region,Sales%0ANorth,45000%0ASouth,38000%0AEast,52000%0AWest,41000" download="regional-sales.csv">📥 regional-sales.csv</a>
+            <p style="font-size: 14px; color: #666;"><em>Hint: Average = 44000</em></p>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <input type="text" id="answer" name="answer" placeholder="Enter average sales" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(document.getElementById('answer').value === '44000' ? '✅ Correct!' : '❌ Incorrect!');
+        });
+    </script>
+</body>
+</html>

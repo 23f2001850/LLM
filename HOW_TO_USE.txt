@@ -1,0 +1,88 @@
+╔══════════════════════════════════════════════════════════════╗
+║            🔐 SECRET KEY - QUICK REFERENCE                   ║
+╚══════════════════════════════════════════════════════════════╝
+
+YOUR SECRET KEY: my-quiz-secret-2025
+
+═══════════════════════════════════════════════════════════════
+
+📝 HOW TO TEST YOUR WEBSITE (STEP BY STEP):
+
+1️⃣  Open Dashboard
+    └─ Go to: http://localhost:3000
+
+2️⃣  Open Test Quiz (in another tab)
+    └─ Open file: c:\Krishna_Jain\LLM\test-quiz.html
+    └─ Copy the URL from browser (like: http://127.0.0.1:5500/test-quiz.html)
+
+3️⃣  Fill the Form in Dashboard:
+    ┌─────────────────────────────────────────────┐
+    │ Email: student@example.com                  │
+    │ Secret Key: my-quiz-secret-2025             │
+    │ Quiz URL: http://127.0.0.1:5500/test-quiz.html │
+    └─────────────────────────────────────────────┘
+
+4️⃣  Click "Submit Quiz"
+
+5️⃣  Watch Live Logs Section:
+    ✅ Starting quiz solver...
+    ✅ Loading page...
+    ✅ Extracting question...
+    ✅ Downloading data...
+    ✅ Analyzing data...
+    ✅ Computing answer: 1050
+    ✅ Submitting answer...
+    ✅ Success!
+
+6️⃣  Check History Table:
+    └─ Green "Success" status should appear
+    └─ Answer should be "1050"
+
+═══════════════════════════════════════════════════════════════
+
+🎯 WHAT DOES IT DO?
+
+Your bot will:
+1. Visit the quiz page automatically
+2. Read the question: "What is the total sum..."
+3. Download the CSV file (sales-data.csv)
+4. Calculate: 150 + 200 + 175 + 225 + 300 = 1050
+5. Submit answer "1050" to the form
+6. Show success in your dashboard
+
+═══════════════════════════════════════════════════════════════
+
+✅ CHECKLIST:
+
+□ Backend running on port 8000 ✓
+□ Dashboard running on port 3000 ✓
+□ Secret key configured: my-quiz-secret-2025 ✓
+□ Test quiz file ready ✓
+
+═══════════════════════════════════════════════════════════════
+
+💡 COMMON MISTAKES:
+
+❌ Wrong: "your-secret-key-12345" (old example)
+✅ Right: "my-quiz-secret-2025"
+
+❌ Wrong: Leaving secret field empty
+✅ Right: Always enter the secret key
+
+❌ Wrong: Using https://example.com/quiz (doesn't exist)
+✅ Right: Use your local test file URL
+
+═══════════════════════════════════════════════════════════════
+
+🔧 IF IT STILL SAYS "Invalid Secret":
+
+1. Check you typed exactly: my-quiz-secret-2025
+2. No extra spaces before/after
+3. Backend was restarted (already done ✓)
+4. Dashboard shows the hint with the correct key
+
+═══════════════════════════════════════════════════════════════
+
+🚀 YOU'RE ALL SET! Try it now at: http://localhost:3000
+
+═══════════════════════════════════════════════════════════════

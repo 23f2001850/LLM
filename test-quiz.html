@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Quiz - Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .quiz-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2563eb; }
+        .question {
+            background: #eff6ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2563eb;
+        }
+        .data-source {
+            background: #f0fdf4;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #86efac;
+        }
+        form {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fef3c7;
+            border-radius: 8px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover { background: #1d4ed8; }
+        .data-link { color: #2563eb; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>📊 Sample Data Analysis Quiz</h1>
+        
+        <div class="question">
+            <h2>Question:</h2>
+            <p><strong>What is the total sum of all sales amounts in the provided dataset?</strong></p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Data Sources:</h3>
+            <p>Download the sales data here:</p>
+            <a href="data:text/csv;charset=utf-8,Product,Amount,Date%0AWidget A,150,2024-01-15%0AWidget B,200,2024-01-16%0AWidget C,175,2024-01-17%0AWidget A,225,2024-01-18%0AWidget B,300,2024-01-19" 
+               download="sales-data.csv" 
+               class="data-link">
+                📥 sales-data.csv
+            </a>
+            <p style="margin-top: 10px; font-size: 14px; color: #666;">
+                <em>Hint: The correct answer is 1050 (sum of 150+200+175+225+300)</em>
+            </p>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <h3>Submit Your Answer:</h3>
+            <label for="answer">Enter the total sum:</label>
+            <input type="text" id="answer" name="answer" placeholder="Enter your answer here..." required>
+            <button type="submit">Submit Answer</button>
+        </form>
+
+        <div style="margin-top: 30px; padding: 15px; background: #fef2f2; border-radius: 8px; border-left: 4px solid #ef4444;">
+            <h4>🤖 Bot Instructions:</h4>
+            <p>This is a test quiz page. The bot should:</p>
+            <ol>
+                <li>Extract the question: "What is the total sum..."</li>
+                <li>Download the CSV file from the data source</li>
+                <li>Calculate sum: 150+200+175+225+300 = 1050</li>
+                <li>Submit the answer "1050" in the form</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const answer = document.getElementById('answer').value;
+            if (answer === '1050') {
+                alert('✅ Correct! The sum is 1050.');
+            } else {
+                alert('❌ Incorrect. Try again!');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz 5: Total Revenue</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #fefce8; }
+        .quiz-container { background: white; padding: 30px; border-radius: 10px; }
+        h1 { color: #ca8a04; }
+        .question { background: #fef9c3; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .data-source { background: #dbeafe; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        form { padding: 20px; background: #e0e7ff; border-radius: 8px; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; }
+        button { background: #ca8a04; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>💰 Quiz 5: Total Revenue</h1>
+        
+        <div class="question">
+            <h2>Question:</h2>
+            <p><strong>What is the total revenue from all transactions?</strong></p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Data:</h3>
+            <a href="data:text/csv;charset=utf-8,Transaction,Revenue%0AT001,1250.50%0AT002,890.25%0AT003,1560.00%0AT004,2100.75%0AT005,1340.00%0AT006,975.50" download="revenue.csv">📥 revenue.csv</a>
+            <p style="font-size: 14px; color: #666;"><em>Hint: Sum = 8117.00 (or 8117)</em></p>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <input type="text" id="answer" name="answer" placeholder="Enter total revenue" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ans = document.getElementById('answer').value;
+            alert(ans === '8117' || ans === '8117.0' || ans === '8117.00' ? '✅ Correct!' : '❌ Incorrect!');
+        });
+    </script>
+</body>
+</html>

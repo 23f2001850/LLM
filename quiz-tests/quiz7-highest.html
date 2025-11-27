@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz 7: Maximum Temperature</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #fff7ed; }
+        .quiz-container { background: white; padding: 30px; border-radius: 10px; }
+        h1 { color: #ea580c; }
+        .question { background: #ffedd5; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .data-source { background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        form { padding: 20px; background: #dbeafe; border-radius: 8px; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; }
+        button { background: #ea580c; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>🌡️ Quiz 7: Highest Temperature</h1>
+        
+        <div class="question">
+            <h2>Question:</h2>
+            <p><strong>What was the highest temperature recorded during the week?</strong></p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Data:</h3>
+            <a href="data:text/csv;charset=utf-8,Day,Temperature%0AMonday,28.5%0ATuesday,31.2%0AWednesday,29.8%0AThursday,33.5%0AFriday,30.1%0ASaturday,32.7%0ASunday,29.3" download="weekly-temp.csv">📥 weekly-temp.csv</a>
+            <p style="font-size: 14px; color: #666;"><em>Hint: Maximum = 33.5</em></p>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <input type="text" id="answer" name="answer" placeholder="Enter highest temperature" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(document.getElementById('answer').value === '33.5' ? '✅ Correct!' : '❌ Incorrect!');
+        });
+    </script>
+</body>
+</html>

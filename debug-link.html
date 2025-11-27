@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Debug Links</title></head>
+<body>
+<h1>Test Data URL</h1>
+<a href="data:text/csv;charset=utf-8,Product,Amount%0AWidget,150" download="test.csv" id="testLink">Download CSV</a>
+
+<script>
+const link = document.getElementById('testLink');
+console.log('getAttribute:', link.getAttribute('href'));
+console.log('property href:', link.href);
+console.log('Starts with data:', link.href.startsWith('data:'));
+</script>
+</body>
+</html>

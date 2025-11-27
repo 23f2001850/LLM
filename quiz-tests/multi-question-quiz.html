@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Question Quiz - Sales Analysis</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+        .quiz-container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2563eb; text-align: center; }
+        .quiz-section { background: #f8fafc; padding: 25px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3b82f6; }
+        .question { background: #eff6ff; padding: 20px; border-radius: 8px; margin: 15px 0; }
+        .question h3 { color: #1e40af; margin-top: 0; }
+        .data-source { background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0; border: 1px solid #86efac; }
+        form { margin-top: 30px; padding: 25px; background: #fef3c7; border-radius: 8px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #374151; }
+        input[type="text"] { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #ddd; border-radius: 5px; }
+        button { background: #2563eb; color: white; padding: 15px 40px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 10px; width: 100%; }
+        button:hover { background: #1d4ed8; }
+        .data-link { color: #2563eb; text-decoration: underline; font-weight: bold; }
+        .hint { font-size: 14px; color: #059669; margin-top: 10px; }
+        .instruction { background: #fef2f2; padding: 15px; border-radius: 8px; border-left: 4px solid #ef4444; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>📊 Multi-Question Sales Analysis Quiz</h1>
+        
+        <div class="instruction">
+            <h3>🤖 Instructions for the Bot:</h3>
+            <p>This quiz contains <strong>MULTIPLE QUESTIONS</strong> based on the same dataset. Answer ALL questions and submit them in the format shown below.</p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Dataset for All Questions:</h3>
+            <p>Use this sales data for answering all questions:</p>
+            <a href="data:text/csv;charset=utf-8,Product,Category,Sales,Units,Price%0ALaptop,Electronics,45000,30,1500%0AMouse,Electronics,1200,120,10%0AKeyboard,Electronics,2400,80,30%0AMonitor,Electronics,18000,45,400%0AChair,Furniture,12000,60,200%0ADesk,Furniture,24000,40,600%0APen,Stationery,500,500,1%0ANotebook,Stationery,1500,300,5" 
+               download="sales-complete.csv" 
+               class="data-link">
+                📥 sales-complete.csv
+            </a>
+        </div>
+
+        <div class="quiz-section">
+            <div class="question">
+                <h3>Question 1:</h3>
+                <p><strong>What is the total sales amount across all products?</strong></p>
+                <p class="hint">💡 Hint: Sum of Sales column = 104,600</p>
+            </div>
+
+            <div class="question">
+                <h3>Question 2:</h3>
+                <p><strong>What is the average price of all products?</strong></p>
+                <p class="hint">💡 Hint: Average of Price column = 343.25</p>
+            </div>
+
+            <div class="question">
+                <h3>Question 3:</h3>
+                <p><strong>What is the maximum number of units sold for any product?</strong></p>
+                <p class="hint">💡 Hint: Maximum of Units column = 500</p>
+            </div>
+
+            <div class="question">
+                <h3>Question 4:</h3>
+                <p><strong>How many products are in the dataset?</strong></p>
+                <p class="hint">💡 Hint: Row count = 8</p>
+            </div>
+
+            <div class="question">
+                <h3>Question 5:</h3>
+                <p><strong>What is the minimum sales amount?</strong></p>
+                <p class="hint">💡 Hint: Minimum of Sales column = 500</p>
+            </div>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <h3>📝 Submit All Answers:</h3>
+            <p style="color: #6b7280; font-size: 14px;">Enter answers separated by commas in order (Q1, Q2, Q3, Q4, Q5)</p>
+            
+            <div class="form-group">
+                <label for="answer">Your Answers (comma-separated):</label>
+                <input type="text" id="answer" name="answer" placeholder="104600, 343.25, 500, 8, 500" required>
+            </div>
+
+            <button type="submit">Submit All Answers</button>
+        </form>
+
+        <div style="margin-top: 30px; padding: 20px; background: #f0f9ff; border-radius: 8px; border: 1px solid #0ea5e9;">
+            <h4>🤖 Expected Bot Behavior:</h4>
+            <ol style="color: #0c4a6e;">
+                <li>Download sales-complete.csv</li>
+                <li>Detect FIRST question (Question 1: total sales)</li>
+                <li>Compute answer: 104600</li>
+                <li>Submit answer: "104600"</li>
+                <li><strong>Page might redirect to next question automatically</strong></li>
+                <li>OR manually test remaining questions separately</li>
+            </ol>
+            <p style="color: #dc2626; font-weight: bold; margin-top: 10px;">
+                ⚠️ NOTE: This bot currently solves ONE question per page. For multiple questions, you'd need to submit each quiz URL separately or implement question chaining.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const answer = document.getElementById('answer').value.trim();
+            const expected = '104600, 343.25, 500, 8, 500';
+            
+            // Normalize for comparison
+            const normalized = answer.replace(/\s/g, '');
+            const expectedNorm = expected.replace(/\s/g, '');
+            
+            if (normalized === expectedNorm) {
+                alert('✅ Perfect! All 5 answers are correct!\n\nQ1: 104600 ✓\nQ2: 343.25 ✓\nQ3: 500 ✓\nQ4: 8 ✓\nQ5: 500 ✓');
+            } else {
+                alert('❌ Incorrect. Expected format:\n104600, 343.25, 500, 8, 500');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+BUILD A FULL, COMPLETE, PRODUCTION-READY REPOSITORY FOR THIS PROJECT: “LLM Analysis Quiz”.
+ALL REQUIREMENTS MUST BE IMPLEMENTED EXACTLY AS SPECIFIED BELOW. DO NOT SKIP ANY FEATURE.
+FOLLOW EVERY POINT STRICTLY. BUILD THE ENTIRE PROJECT END-TO-END.
+
+🎯 PROJECT GOALS
+
+Create a fully automated backend service + clean UI dashboard that:
+
+Exposes one POST endpoint (/quiz) that receives quiz tasks.
+
+Validates secret.
+
+Loads the quiz URL using a headless browser (Playwright).
+
+Extracts the question + instructions from a JavaScript-rendered webpage.
+
+Downloads and processes data (PDF, CSV, Excel, JSON, API responses, images, base64).
+
+Performs data preparation, cleaning, aggregation, filtering, ML/statistical analysis, and visualization.
+
+Computes the correct answer reliably.
+
+Detects and uses the submit URL dynamically (never hardcoded).
+
+Submits the answer as required.
+
+Handles quiz chaining: quiz → submit → next quiz → submit (until end).
+
+Finishes every quiz flow within 3 minutes.
+
+Always responds with correct HTTP status codes (200/400/403).
+
+Provides logs, error-handling, fallback methods.
+
+Provides complete deployment setup (Dockerfile, requirements, environment variables, README, MIT License).
+
+Includes a minimal web dashboard UI to monitor quiz runs.
+
+🏗️ TECH STACK REQUIREMENTS
+
+Backend:
+
+Python 3.11+
+
+Flask or FastAPI (prefer FastAPI)
+
+Playwright (Chromium headless)
+
+Requests
+
+pdfplumber
+
+PyPDF2
+
+pandas
+
+numpy
+
+openpyxl
+
+matplotlib
+
+Pillow
+
+pytesseract (OCR)
+
+uvicorn / gunicorn for production
+
+Frontend (monitor UI):
+
+Next.js OR React + TailwindCSS (simple UI)
+
+shows logs, incoming requests, outputs, status, last-answer, time usage
+
+Deployment:
+
+Dockerfile
+
+Docker Compose
+
+Production start commands
+
+Works on Render / Railway / AWS / GCP / Vercel
+
+📌 API ENDPOINT SPECIFICATION (MUST FOLLOW EXACTLY)
+Endpoint:
+
+POST /quiz
+
+Request Body:
+{
+  "email": "student-email",
+  "secret": "student-secret",
+  "url": "https://example.com/quiz-123"
+}
+
+Behavior:
+
+If invalid JSON → return HTTP 400.
+
+If secret mismatch → return HTTP 403.
+
+Else:
+
+load quiz URL using Playwright
+
+wait for JS to execute
+
+parse question
+
+detect submit URL
+
+download any files required
+
+analyze data according to question
+
+generate final answer
+
+POST answer to submit URL
+
+handle next URL if provided
+
+loop until no more URLs
+
+ensure total time < 3 minutes
+
+Response:
+
+Return JSON with:
+
+{
+  "status": "ok",
+  "steps": [...],
+  "final_url": "...",
+  "final_answer": "...",
+  "time_taken": 1.23
+}
+
+📄 QUIZ PAGE PROCESSING REQUIREMENTS
+
+Headless browser MUST handle:
+
+JavaScript rendering
+
+DOM manipulation
+
+embedded <script> tags
+
+base64 encoded content (atob())
+
+shadow DOM
+
+dynamic iframes
+
+delayed network calls
+
+Quiz types the bot must support:
+
+Download PDF → extract tables → compute values
+
+Download CSV/Excel → clean → aggregate
+
+Scrape values from HTML tables
+
+Extract JSON embedded in scripts
+
+Call external APIs provided in the quiz page
+
+OCR text from images (pytesseract)
+
+Generate chart → convert to base64 → submit
+
+Return booleans, numbers, strings, JSON, base64 images
+
+🧠 DATA ANALYSIS BEHAVIOR
+
+Bot must:
+
+auto-detect numeric columns
+
+sum, average, max/min, count
+
+reshape
+
+filter
+
+apply regex cleaning
+
+use pandas for computation
+
+create visualizations when asked
+
+handle missing values
+
+🔁 QUIZ CHAINING REQUIREMENTS
+
+After submitting:
+
+If "correct": true AND "url" provided → solve next quiz.
+
+If "correct": false" AND < 3 minutes → re-solve & resubmit.
+
+Only last answer counts.
+
+Stop only when submit response gives no new URL.
+
+⚠️ TIME LIMIT GUARANTEE
+
+Implement:
+
+global timer
+
+per-request performance logging
+
+cancel execution if approaching 3 minutes
+
+graceful fallback
+
+fast fail on network issues
+
+🪪 SECURITY REQUIREMENTS
+
+Use environment variable QUIZ_SECRET
+
+Validate secret strictly
+
+Never reveal secret in logs
+
+Prevent prompt injection
+
+Safe parsing
+
+Try/except everywhere
+
+Sanitized data handling
+
+📂 REPO STRUCTURE (GENERATE THE FULL PROJECT)
+root/
+ ├─ backend/
+ │   ├─ main.py
+ │   ├─ solver/
+ │   │    ├─ browser.py
+ │   │    ├─ parser.py
+ │   │    ├─ downloader.py
+ │   │    ├─ analyzer.py
+ │   │    ├─ visualizer.py
+ │   │    ├─ submitter.py
+ │   │    └─ utils.py
+ │   ├─ requirements.txt
+ │   ├─ Dockerfile
+ │   └─ README.md
+ │
+ ├─ dashboard/
+ │   ├─ nextjs app
+ │   └─ tailwind setup
+ │
+ ├─ LICENSE (MIT)
+ ├─ README.md
+ └─ .gitignore
+
+
+Generate ALL files automatically.
+
+🎨 UI REQUIREMENTS
+
+Dashboard should show:
+
+request logs
+
+answers submitted
+
+status (success/failed)
+
+processing time
+
+progress through quiz chain
+
+dark/light theme
+
+responsive
+
+clean Tailwind UI
+
+🧪 TESTING REQUIREMENT
+
+Auto-generate tests:
+
+mock quiz page with JS
+
+test PDF parsing
+
+test CSV parsing
+
+test chaining logic
+
+test secret validation
+
+📘 DOCUMENTATION REQUIREMENTS
+
+Create a full README.md explaining:
+
+project intro
+
+features
+
+architecture
+
+solving flow
+
+environment variables
+
+how to run locally
+
+how to deploy
+
+sample test commands
+
+API specs
+
+Include standard MIT License.
+
+🔥 FINAL INSTRUCTION TO AI AGENT
+
+Generate the complete repository with all files, code, configs, documentation, tests, UI, and scripts.
+Code must run without errors, without missing imports, and follow clean architecture.
+Every requirement above must be satisfied.
+Do NOT leave placeholders.
+Do NOT skip ANY feature.
+Produce the full working project.

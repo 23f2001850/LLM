@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz 3: Count Items</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #fef2f2; }
+        .quiz-container { background: white; padding: 30px; border-radius: 10px; }
+        h1 { color: #dc2626; }
+        .question { background: #fee2e2; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .data-source { background: #dbeafe; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        form { padding: 20px; background: #fef3c7; border-radius: 8px; }
+        input { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; }
+        button { background: #dc2626; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>🔢 Quiz 3: Count Products</h1>
+        
+        <div class="question">
+            <h2>Question:</h2>
+            <p><strong>How many products are listed in the inventory?</strong></p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Data:</h3>
+            <a href="data:text/csv;charset=utf-8,Product,Stock%0ALaptop,45%0AMouse,120%0AKeyboard,89%0AMonitor,34%0AHeadphones,67%0AWebcam,23%0ASpeaker,56" download="inventory.csv">📥 inventory.csv</a>
+            <p style="font-size: 14px; color: #666;"><em>Hint: Count = 7 products</em></p>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <input type="text" id="answer" name="answer" placeholder="Enter count" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(document.getElementById('answer').value === '7' ? '✅ Correct!' : '❌ Incorrect!');
+        });
+    </script>
+</body>
+</html>

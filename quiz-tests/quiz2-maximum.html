@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz 2: Maximum Value</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+        .quiz-container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #059669; }
+        .question { background: #d1fae5; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #059669; }
+        .data-source { background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        form { margin-top: 30px; padding: 20px; background: #eff6ff; border-radius: 8px; }
+        input { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; }
+        button { background: #059669; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; }
+        .hint { font-size: 14px; color: #666; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>📈 Quiz 2: Highest Score</h1>
+        
+        <div class="question">
+            <h2>Question:</h2>
+            <p><strong>What is the maximum score achieved by any student?</strong></p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Data:</h3>
+            <a href="data:text/csv;charset=utf-8,Student,Score%0AAlice,87%0ABob,92%0ACharlie,78%0ADiana,95%0AEve,88" download="scores.csv">📥 scores.csv</a>
+            <p class="hint"><em>Hint: Maximum score is 95</em></p>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <h3>Answer:</h3>
+            <input type="text" id="answer" name="answer" placeholder="Enter maximum score" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(document.getElementById('answer').value === '95' ? '✅ Correct!' : '❌ Incorrect!');
+        });
+    </script>
+</body>
+</html>

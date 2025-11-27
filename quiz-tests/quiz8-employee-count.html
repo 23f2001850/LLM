@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz 8: Count Employees</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #ecfdf5; }
+        .quiz-container { background: white; padding: 30px; border-radius: 10px; }
+        h1 { color: #059669; }
+        .question { background: #d1fae5; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .data-source { background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        form { padding: 20px; background: #dbeafe; border-radius: 8px; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; }
+        button { background: #059669; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>👥 Quiz 8: Employee Count</h1>
+        
+        <div class="question">
+            <h2>Question:</h2>
+            <p><strong>How many employees are in the dataset?</strong></p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Data:</h3>
+            <a href="data:text/csv;charset=utf-8,Name,Department,Salary%0AJohn,IT,75000%0AMary,HR,68000%0APeter,Sales,72000%0ASusan,IT,78000%0ADavid,Finance,82000%0AEmily,Sales,71000%0AMichael,HR,69000%0ASarah,IT,76000%0ARobert,Finance,85000%0ALinda,Sales,73000" download="employees.csv">📥 employees.csv</a>
+            <p style="font-size: 14px; color: #666;"><em>Hint: Count = 10 employees</em></p>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <input type="text" id="answer" name="answer" placeholder="Enter employee count" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(document.getElementById('answer').value === '10' ? '✅ Correct!' : '❌ Incorrect!');
+        });
+    </script>
+</body>
+</html>

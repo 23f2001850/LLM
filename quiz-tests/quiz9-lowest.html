@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz 9: Lowest Stock</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #fffbeb; }
+        .quiz-container { background: white; padding: 30px; border-radius: 10px; }
+        h1 { color: #d97706; }
+        .question { background: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .data-source { background: #dbeafe; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        form { padding: 20px; background: #f3e8ff; border-radius: 8px; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; }
+        button { background: #d97706; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>📦 Quiz 9: Minimum Stock</h1>
+        
+        <div class="question">
+            <h2>Question:</h2>
+            <p><strong>What is the minimum stock quantity in the warehouse?</strong></p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Data:</h3>
+            <a href="data:text/csv;charset=utf-8,Item,Stock%0AItem-A,125%0AItem-B,89%0AItem-C,203%0AItem-D,45%0AItem-E,167%0AItem-F,98" download="warehouse.csv">📥 warehouse.csv</a>
+            <p style="font-size: 14px; color: #666;"><em>Hint: Minimum = 45</em></p>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <input type="text" id="answer" name="answer" placeholder="Enter minimum stock" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(document.getElementById('answer').value === '45' ? '✅ Correct!' : '❌ Incorrect!');
+        });
+    </script>
+</body>
+</html>

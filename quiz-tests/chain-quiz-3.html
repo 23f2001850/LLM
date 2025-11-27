@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain Quiz 3 - Maximum Value</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #00f2fe;
+            border-bottom: 3px solid #00f2fe;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .badge {
+            background: #00f2fe;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 5px solid #00f2fe;
+        }
+        .data-link {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #2196F3;
+        }
+        .data-link a {
+            color: #1976D2;
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        form {
+            background: #fff3cd;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 5px solid #ffc107;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #00f2fe;
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #4facfe;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+        .info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+        .success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .success h2 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="badge">🔗 CHAIN QUIZ 3 of 3 - FINAL</span>
+        <h1>📊 Chain Quiz Test - Part 3 (Final)</h1>
+        
+        <div class="info">
+            <strong>🎉 You've reached the FINAL quiz!</strong><br>
+            Your bot successfully chained through Quiz 1 → Quiz 2 → Quiz 3. Solve this to complete the entire chain!
+        </div>
+
+        <div class="question">
+            <h2>Question 3: Find Maximum Score</h2>
+            <p><strong>Task:</strong> What is the HIGHEST score in the dataset?</p>
+            <p><strong>Instructions:</strong> Download the CSV file, find the maximum value in the "Score" column, and submit it.</p>
+        </div>
+
+        <div class="data-link">
+            <h3>📁 Data Source</h3>
+            <p><strong>CSV File:</strong></p>
+            <a href="data:text/csv;base64,U3R1ZGVudCxTY29yZQpBbGljZSw4NQpCb2IsOTIKQ2hhcmxpZSw3OApEaWFuYSw5OApFdmUsODg=" download="chain3-scores.csv">Download chain3-scores.csv</a>
+            <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                Data Preview:<br>
+                Student,Score<br>
+                Alice,85<br>
+                Bob,92<br>
+                Charlie,78<br>
+                Diana,98<br>
+                Eve,88
+            </p>
+            <p style="margin-top: 10px; font-size: 14px; color: #e91e63;">
+                <strong>Expected Answer: 98</strong> (Diana's score is the highest)
+            </p>
+        </div>
+
+        <form id="answerForm" action="http://localhost:3001/submit-chain-3" method="POST">
+            <h3>Submit Your Answer</h3>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            
+            <label for="answer">Your Answer (Maximum Score):</label>
+            <input type="text" id="answer" name="answer" required placeholder="Enter the maximum (e.g., 98)">
+            
+            <button type="submit">🏁 Submit Final Answer & Complete Chain</button>
+        </form>
+
+        <div class="info" style="margin-top: 30px;">
+            <strong>🔄 Chain Progress:</strong><br>
+            ✅ Quiz 1: Completed (Sum = 1420)<br>
+            ✅ Quiz 2: Completed (Average = 23.46)<br>
+            ⏳ Quiz 3: In Progress (Maximum = ?)
+        </div>
+
+        <div class="success" style="margin-top: 30px; display: none;" id="successMessage">
+            <h2>🎉 CHAIN COMPLETED SUCCESSFULLY! 🎉</h2>
+            <p>All 3 quizzes solved correctly!</p>
+            <p>No more URLs will be returned - chain is complete.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const answer = document.getElementById('answer').value.trim();
+            
+            const correctAnswer = "98";
+            const isCorrect = answer === correctAnswer;
+            
+            const response = {
+                correct: isCorrect,
+                message: isCorrect ? "🎉 Correct! Chain completed successfully!" : `Incorrect. Expected ${correctAnswer}, got ${answer}`,
+                answer_submitted: answer,
+                quiz_number: 3,
+                chain_complete: isCorrect,
+                total_quizzes_solved: isCorrect ? 3 : 2,
+                email: email
+            };
+            
+            // IMPORTANT: No next_url or url field when chain is complete
+            // This signals the bot to stop
+            
+            if (isCorrect) {
+                document.getElementById('successMessage').style.display = 'block';
+            }
+            
+            alert(JSON.stringify(response, null, 2));
+            console.log('Chain Quiz 3 (Final) Response:', response);
+            console.log('Note: No "url" or "next_url" field = chain complete');
+        });
+    </script>
+</body>
+</html>

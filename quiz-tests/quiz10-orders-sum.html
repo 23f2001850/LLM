@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz 10: Total Orders</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #f0f9ff; }
+        .quiz-container { background: white; padding: 30px; border-radius: 10px; }
+        h1 { color: #0284c7; }
+        .question { background: #e0f2fe; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .data-source { background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        form { padding: 20px; background: #f3e8ff; border-radius: 8px; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; }
+        button { background: #0284c7; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>🛒 Quiz 10: Sum of All Orders</h1>
+        
+        <div class="question">
+            <h2>Question:</h2>
+            <p><strong>What is the total value of all orders combined?</strong></p>
+        </div>
+
+        <div class="data-source">
+            <h3>📁 Data:</h3>
+            <a href="data:text/csv;charset=utf-8,OrderID,Value%0AO-001,450.25%0AO-002,890.50%0AO-003,1250.00%0AO-004,675.75%0AO-005,1100.00%0AO-006,825.50%0AO-007,950.25%0AO-008,1475.00" download="orders.csv">📥 orders.csv</a>
+            <p style="font-size: 14px; color: #666;"><em>Hint: Total = 7617.25</em></p>
+        </div>
+
+        <form id="answerForm" action="#" method="POST">
+            <input type="text" id="answer" name="answer" placeholder="Enter total value" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ans = document.getElementById('answer').value;
+            alert(ans === '7617.25' || ans === '7617' ? '✅ Correct!' : '❌ Incorrect!');
+        });
+    </script>
+</body>
+</html>

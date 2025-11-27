@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain Quiz 1 - Sum Calculation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 5px solid #667eea;
+        }
+        .data-link {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #2196F3;
+        }
+        .data-link a {
+            color: #1976D2;
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        form {
+            background: #fff3cd;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 5px solid #ffc107;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="badge">🔗 CHAIN QUIZ 1 of 3</span>
+        <h1>📊 Chain Quiz Test - Part 1</h1>
+        
+        <div class="info">
+            <strong>ℹ️ Multi-Quiz Chain Test</strong><br>
+            This is the FIRST quiz in a 3-quiz chain. After submitting the correct answer, you'll receive a URL to the next quiz.
+        </div>
+
+        <div class="question">
+            <h2>Question 1: Calculate Total Sales</h2>
+            <p><strong>Task:</strong> What is the TOTAL of all sales values in the provided dataset?</p>
+            <p><strong>Instructions:</strong> Download the CSV file, sum all values in the "Sales" column, and submit the total.</p>
+        </div>
+
+        <div class="data-link">
+            <h3>📁 Data Source</h3>
+            <p><strong>CSV File:</strong></p>
+            <a href="data:text/csv;base64,UHJvZHVjdCxTYWxlcwpMYXB0b3AsODUwCk1vdXNlLDI1CktleWJvYXJkLDc1Ck1vbml0b3IsMzUwCldlYmNhbSwxMjA=" download="chain1-sales.csv">Download chain1-sales.csv</a>
+            <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                Data Preview:<br>
+                Product,Sales<br>
+                Laptop,850<br>
+                Mouse,25<br>
+                Keyboard,75<br>
+                Monitor,350<br>
+                Webcam,120
+            </p>
+            <p style="margin-top: 10px; font-size: 14px; color: #e91e63;">
+                <strong>Expected Answer: 1420</strong> (850+25+75+350+120)
+            </p>
+        </div>
+
+        <form id="answerForm" action="http://localhost:3001/submit-chain-1" method="POST">
+            <h3>Submit Your Answer</h3>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            
+            <label for="answer">Your Answer (Total Sales):</label>
+            <input type="text" id="answer" name="answer" required placeholder="Enter the sum (e.g., 1420)">
+            
+            <button type="submit">Submit Answer & Continue to Quiz 2 →</button>
+        </form>
+
+        <div class="info" style="margin-top: 30px;">
+            <strong>🔄 Chain Behavior:</strong><br>
+            • Correct answer → Returns JSON with "next_url" pointing to chain-quiz-2.html<br>
+            • Incorrect answer → Returns error, no next URL<br>
+            • Your bot must automatically follow the chain until completion
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const answer = document.getElementById('answer').value.trim();
+            
+            // Simulate server response
+            const correctAnswer = "1420";
+            const isCorrect = answer === correctAnswer;
+            
+            const response = {
+                correct: isCorrect,
+                message: isCorrect ? "Correct! Proceeding to next quiz." : `Incorrect. Expected ${correctAnswer}, got ${answer}`,
+                answer_submitted: answer,
+                quiz_number: 1,
+                email: email
+            };
+            
+            if (isCorrect) {
+                // Return next quiz URL for chaining
+                response.next_url = window.location.href.replace('chain-quiz-1.html', 'chain-quiz-2.html');
+                response.url = response.next_url; // Support both field names
+            }
+            
+            alert(JSON.stringify(response, null, 2));
+            console.log('Chain Quiz 1 Response:', response);
+            
+            // In real implementation, this would be sent to server
+            // For testing, we show the response that would be returned
+        });
+    </script>
+</body>
+</html>

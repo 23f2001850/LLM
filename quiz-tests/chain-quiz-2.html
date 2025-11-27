@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain Quiz 2 - Average Calculation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #f5576c;
+            border-bottom: 3px solid #f5576c;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .badge {
+            background: #f5576c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 5px solid #f5576c;
+        }
+        .data-link {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #2196F3;
+        }
+        .data-link a {
+            color: #1976D2;
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        form {
+            background: #fff3cd;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 5px solid #ffc107;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #f5576c;
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #f093fb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+        .info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="badge">🔗 CHAIN QUIZ 2 of 3</span>
+        <h1>📊 Chain Quiz Test - Part 2</h1>
+        
+        <div class="info">
+            <strong>✅ You've reached Quiz 2!</strong><br>
+            This confirms your bot successfully chained from Quiz 1. Now solve this quiz to continue to Quiz 3.
+        </div>
+
+        <div class="question">
+            <h2>Question 2: Calculate Average Temperature</h2>
+            <p><strong>Task:</strong> What is the AVERAGE temperature across all measurements?</p>
+            <p><strong>Instructions:</strong> Download the CSV file, calculate the mean of the "Temperature" column, and round to 2 decimal places.</p>
+        </div>
+
+        <div class="data-link">
+            <h3>📁 Data Source</h3>
+            <p><strong>CSV File:</strong></p>
+            <a href="data:text/csv;base64,RGF5LFRlbXBlcmF0dXJlCk1vbmRheSwyMi41ClR1ZXNkYXksMjQuMwpXZWRuZXNkYXksMjEuOApUaHVyc2RheSwyMy4xCkZyaWRheSwyNS42" download="chain2-temperature.csv">Download chain2-temperature.csv</a>
+            <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                Data Preview:<br>
+                Day,Temperature<br>
+                Monday,22.5<br>
+                Tuesday,24.3<br>
+                Wednesday,21.8<br>
+                Thursday,23.1<br>
+                Friday,25.6
+            </p>
+            <p style="margin-top: 10px; font-size: 14px; color: #e91e63;">
+                <strong>Expected Answer: 23.46</strong> ((22.5+24.3+21.8+23.1+25.6)/5 = 23.46)
+            </p>
+        </div>
+
+        <form id="answerForm" action="http://localhost:3001/submit-chain-2" method="POST">
+            <h3>Submit Your Answer</h3>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            
+            <label for="answer">Your Answer (Average Temperature):</label>
+            <input type="text" id="answer" name="answer" required placeholder="Enter the average (e.g., 23.46)">
+            
+            <button type="submit">Submit Answer & Continue to Quiz 3 →</button>
+        </form>
+
+        <div class="info" style="margin-top: 30px;">
+            <strong>🔄 Chain Progress:</strong><br>
+            ✅ Quiz 1: Completed (Sum = 1420)<br>
+            ⏳ Quiz 2: In Progress (Average = ?)<br>
+            ⭕ Quiz 3: Waiting...
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const answer = document.getElementById('answer').value.trim();
+            
+            // Accept both 23.46 and 23.5 (rounded)
+            const correctAnswers = ["23.46", "23.5", "23"];
+            const isCorrect = correctAnswers.includes(answer);
+            
+            const response = {
+                correct: isCorrect,
+                message: isCorrect ? "Correct! Proceeding to final quiz." : `Incorrect. Expected 23.46, got ${answer}`,
+                answer_submitted: answer,
+                quiz_number: 2,
+                email: email
+            };
+            
+            if (isCorrect) {
+                response.next_url = window.location.href.replace('chain-quiz-2.html', 'chain-quiz-3.html');
+                response.url = response.next_url;
+            }
+            
+            alert(JSON.stringify(response, null, 2));
+            console.log('Chain Quiz 2 Response:', response);
+        });
+    </script>
+</body>
+</html>
