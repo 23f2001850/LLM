@@ -6,7 +6,7 @@ set -o errexit  # Exit on error
 echo "Installing Python dependencies..."
 pip install -r requirements.txt
 
-echo "Installing Playwright browsers with dependencies..."
-playwright install --with-deps chromium
+echo "Installing Playwright chromium browser (without system deps)..."
+PLAYWRIGHT_BROWSERS_PATH=$HOME/.cache/ms-playwright playwright install chromium --no-shell
 
 echo "Build completed successfully!"
