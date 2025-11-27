@@ -231,15 +231,12 @@ class QuizParser:
         if base_url:
             from urllib.parse import urlparse
             parsed = urlparse(base_url)
-            # Try common submit endpoints
-            common_endpoints = ['/submit', '/answer', '/check']
-            for endpoint in common_endpoints:
-                potential_url = f"{parsed.scheme}://{parsed.netloc}{endpoint}"
-                logger.info(f"[SUBMIT_URL_DEBUG] Trying fallback: {potential_url}")
-                # Return the first one (most common is /submit)
-                return potential_url
+            # Try common submit endpoints - return /submit
+            potential_url = f"{parsed.scheme}://{parsed.netloc}/submit"
+            logger.info(f"[SUBMIT_URL_DEBUG] Using fallback: {potential_url}")
+            return potential_url
         
-        logger.warning("[SUBMIT_URL_DEBUG] No submit URL found!")
+        logger.warning("[SUBMIT_URL_DEBUG] No submit URL found and no base_url!")
         return None
     
     def _extract_answer_format(self) -> str:
