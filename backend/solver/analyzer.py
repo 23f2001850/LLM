@@ -36,6 +36,16 @@ class DataAnalyzer:
             question = quiz_data.get("question", "").lower()
             answer_format = quiz_data.get("answer_format", "string")
             
+            # Handle case with no question/data (like demo quiz)
+            if not question and not downloaded_data:
+                logger.info("No question or data found - returning default answer for demo/test quiz")
+                return {
+                    "analysis_type": "default",
+                    "raw_result": "demo_answer",
+                    "answer": "demo_answer",
+                    "data_summary": {"note": "No data to analyze"}
+                }
+            
             # Combine all data sources
             all_data = self._aggregate_data(downloaded_data)
             

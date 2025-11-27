@@ -151,12 +151,29 @@ class QuizParser:
     
     def _extract_submit_url(self) -> Optional[str]:
         """Extract submit URL dynamically"""
+        base_url = self.page_content.get("url", "")
+        
+        # Helper to make absolute URL
+        def make_absolute(url):
+            if not url:
+                return None
+            if url.startswith('http'):
+                return url
+            if url.startswith('/'):
+                # Absolute path - use base URL origin
+                from urllib.parse import urlparse
+                parsed = urlparse(base_url)
+                return f"{parsed.scheme}://{parsed.netloc}{url}"
+            # Relative path
+            from urllib.parse import urljoin
+            return urljoin(base_url, url)
+        
         # Check forms
         forms = self.page_content.get("forms", [])
         for form in forms:
             action = form.get("action", "")
             if action and ('submit' in action.lower() or 'answer' in action.lower()):
-                return action
+                return make_absolute(action)
             if action and action.startswith('http'):
                 return action
         
@@ -164,14 +181,14 @@ class QuizParser:
         for data_attr in self.page_content.get("data_attrs", []):
             submit_url = data_attr.get("submit", "")
             if submit_url:
-                return submit_url
+                return make_absolute(submit_url)
         
         # Check links with submit keyword
         for link in self.page_content.get("links", []):
             href = link.get("href", "")
             text = link.get("text", "").lower()
             if 'submit' in text or 'answer' in text or 'submit' in href.lower():
-                return href
+                return make_absolute(href)
         
         # Check scripts for submit URLs
         for script in self.page_content.get("scripts", []):
@@ -187,12 +204,17 @@ class QuizParser:
                 matches = re.findall(pattern, script)
                 for match in matches:
                     if 'submit' in match.lower() or match.startswith('http'):
-                        return match
+                        return make_absolute(match)
+        
+        # Look for text mentioning "/submit" or similar
+        text_content = self.page_content.get("text", "")
+        if '/submit' in text_content:
+            return make_absolute('/submit')
         
         # If still not found, look for any POST endpoint
         for form in forms:
             if form.get("method", "").upper() == "POST":
-                return form.get("action", "")
+                return make_absolute(form.get("action", ""))
         
         return None
     
