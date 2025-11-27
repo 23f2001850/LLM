@@ -152,6 +152,7 @@ class QuizParser:
     def _extract_submit_url(self) -> Optional[str]:
         """Extract submit URL dynamically"""
         base_url = self.page_content.get("url", "")
+        logger.info(f"[SUBMIT_URL_DEBUG] Extracting submit URL from base: {base_url}")
         
         # Helper to make absolute URL
         def make_absolute(url):
@@ -170,11 +171,16 @@ class QuizParser:
         
         # Check forms
         forms = self.page_content.get("forms", [])
-        for form in forms:
+        logger.info(f"[SUBMIT_URL_DEBUG] Found {len(forms)} forms")
+        for i, form in enumerate(forms):
             action = form.get("action", "")
+            logger.info(f"[SUBMIT_URL_DEBUG] Form {i}: action='{action}', method='{form.get('method', '')}'")
             if action and ('submit' in action.lower() or 'answer' in action.lower()):
-                return make_absolute(action)
+                abs_url = make_absolute(action)
+                logger.info(f"[SUBMIT_URL_DEBUG] Found submit URL in form: {abs_url}")
+                return abs_url
             if action and action.startswith('http'):
+                logger.info(f"[SUBMIT_URL_DEBUG] Found http URL in form: {action}")
                 return action
         
         # Check data attributes
@@ -209,13 +215,18 @@ class QuizParser:
         # Look for text mentioning "/submit" or similar
         text_content = self.page_content.get("text", "")
         if '/submit' in text_content:
-            return make_absolute('/submit')
+            abs_url = make_absolute('/submit')
+            logger.info(f"[SUBMIT_URL_DEBUG] Found /submit in text content: {abs_url}")
+            return abs_url
         
         # If still not found, look for any POST endpoint
         for form in forms:
             if form.get("method", "").upper() == "POST":
-                return make_absolute(form.get("action", ""))
+                abs_url = make_absolute(form.get("action", ""))
+                logger.info(f"[SUBMIT_URL_DEBUG] Using POST form action: {abs_url}")
+                return abs_url
         
+        logger.warning("[SUBMIT_URL_DEBUG] No submit URL found!")
         return None
     
     def _extract_answer_format(self) -> str:
