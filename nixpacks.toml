@@ -1,0 +1,14 @@
+providers = ["..."]
+
+[phases.setup]
+nixPkgs = ["python311", "playwright-driver-chromium"]
+nixLibs = ["nss", "nspr", "atk", "at-spi2-atk", "cups", "dbus", "libdrm", "gtk3", "pango", "cairo", "mesa", "gdk-pixbuf", "alsa-lib"]
+
+[phases.install]
+cmds = [
+    "pip install -r requirements.txt",
+    "playwright install chromium"
+]
+
+[start]
+cmd = "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
