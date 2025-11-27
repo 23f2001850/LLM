@@ -226,6 +226,19 @@ class QuizParser:
                 logger.info(f"[SUBMIT_URL_DEBUG] Using POST form action: {abs_url}")
                 return abs_url
         
+        # Last resort: construct submit URL from base URL
+        # Most quiz systems follow a pattern like /submit or /answer
+        if base_url:
+            from urllib.parse import urlparse
+            parsed = urlparse(base_url)
+            # Try common submit endpoints
+            common_endpoints = ['/submit', '/answer', '/check']
+            for endpoint in common_endpoints:
+                potential_url = f"{parsed.scheme}://{parsed.netloc}{endpoint}"
+                logger.info(f"[SUBMIT_URL_DEBUG] Trying fallback: {potential_url}")
+                # Return the first one (most common is /submit)
+                return potential_url
+        
         logger.warning("[SUBMIT_URL_DEBUG] No submit URL found!")
         return None
     
